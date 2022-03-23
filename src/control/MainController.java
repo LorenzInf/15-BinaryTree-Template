@@ -1,8 +1,8 @@
-package Control;
+package control;
 
-import Model.BinaryTree;
-import View.DrawingPanel;
-import View.TreeView.TreeNode;
+import model.BinaryTree;
+import view.DrawingPanel;
+import view.treeView.TreeNode;
 
 /**
  * Created by Jean-Pierre on 12.01.2017.

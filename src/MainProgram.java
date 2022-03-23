@@ -1,5 +1,5 @@
-import Control.MainController;
-import View.MainFrame;
+import control.MainController;
+import view.MainFrame;
 
 import java.awt.*;
 

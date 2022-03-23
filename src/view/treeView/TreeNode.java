@@ -1,7 +1,7 @@
-package View.TreeView;
+package view.treeView;
 
-import View.DrawTool;
-import View.GraphicalObject;
+import view.DrawTool;
+import view.GraphicalObject;
 
 import java.awt.*;
 
