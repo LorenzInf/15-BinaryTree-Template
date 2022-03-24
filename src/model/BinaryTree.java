@@ -20,7 +20,6 @@ package model;
  */
 public class BinaryTree<ContentType> {
 
-	//TODO 01: Vervollständige die Klasse BinaryTree gemäß Dokumentation. Beachte dabei, dass du auf die Inhaltsobjekte des Objekts node per Punktnotation direkt zugreifen kannst, z.B. per "this.node.content".
 	/* --------- Anfang der privaten inneren Klasse -------------- */
 
 	/**
@@ -38,10 +37,9 @@ public class BinaryTree<ContentType> {
 			// beide von null verschieden sind. Also hat ein Blatt immer zwei 
 			// leere Teilbaeume unter sich.
 			this.content = pContent;
-			left = new BinaryTree<CT>();
-			right = new BinaryTree<CT>();
+			left = new BinaryTree<>();
+			right = new BinaryTree<>();
 		}
-		
 	}
 
 	/* ----------- Ende der privaten inneren Klasse -------------- */
@@ -52,7 +50,6 @@ public class BinaryTree<ContentType> {
 	 * Nach dem Aufruf des Konstruktors existiert ein leerer Binaerbaum.
 	 */
 	public BinaryTree() {
-		//TODO 01a
 		node = null;
 	}
 
@@ -66,7 +63,6 @@ public class BinaryTree<ContentType> {
 	 *            das Inhaltsobjekt des Wurzelknotens vom Typ CT
 	 */
 	public BinaryTree(ContentType pContent) {
-		//TODO 01b
 		if(pContent != null) node = new BTNode<>(pContent);
 		else node = null;
 	}
@@ -87,7 +83,6 @@ public class BinaryTree<ContentType> {
 	 *            der rechte Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
-		//TODO 01c
 		if(pContent != null) {
 			node = new BTNode<>(pContent);
 			if(pLeftTree != null) node.left = pLeftTree;
@@ -106,8 +101,7 @@ public class BinaryTree<ContentType> {
 	 * @return true, falls der Binaerbaum leer ist, sonst false
 	 */
 	public boolean isEmpty() {
-		//TODO 01d
-		return node.content == null;
+		return node == null;
 	}
 
 	/**
@@ -121,13 +115,12 @@ public class BinaryTree<ContentType> {
 	 *            neues Inhaltsobjekt vom Typ CT
 	 */
 	public void setContent(ContentType pContent) {
-		//TODO 01e
 		if(pContent != null) {
 			if(this.isEmpty()) {
-				node.right = new BinaryTree<>();
-				node.left = new BinaryTree<>();
+				node = new BTNode<>(pContent);
+			} else {
+				node.content = pContent;
 			}
-			node.content = pContent;
 		}
 	}
 
@@ -139,8 +132,11 @@ public class BinaryTree<ContentType> {
 	 *         der Binaerbaum leer ist
 	 */
 	public ContentType getContent() {
-		//TODO 01f
-		return node.content;
+		if(isEmpty()) {
+			return null;
+		} else {
+			return node.content;
+		}
 	}
 
 	/**
@@ -152,7 +148,6 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
-		//TODO 01g
 		if(pTree != null && !this.isEmpty()) {
 			node.left = pTree;
 		}
@@ -167,7 +162,6 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
-		//TODO 01h
 		if(pTree != null && !this.isEmpty()) {
 			node.right = pTree;
 		}
@@ -181,8 +175,11 @@ public class BinaryTree<ContentType> {
 	 * der aktuelle Binaerbaum leer ist
 	 */
 	public BinaryTree<ContentType> getLeftTree() {
-		//TODO 01i
-		return node.left;
+		if (isEmpty()) {
+			return null;
+		} else{
+			return node.left;
+		}
 	}
 
 	/**
@@ -193,7 +190,10 @@ public class BinaryTree<ContentType> {
 	 * der aktuelle Binaerbaum (this) leer ist
 	 */
 	public BinaryTree<ContentType> getRightTree() {
-		//TODO 01j
-		return node.right;
+		if (isEmpty()) {
+			return null;
+		} else{
+			return node.right;
+		}
 	}
 }

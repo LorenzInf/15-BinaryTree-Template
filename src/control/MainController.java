@@ -3,6 +3,9 @@ package control;
 import model.BinaryTree;
 import view.DrawingPanel;
 import view.treeView.TreeNode;
+import view.treeView.TreePath;
+
+import java.util.Random;
 
 /**
  * Created by Jean-Pierre on 12.01.2017.
@@ -20,12 +23,83 @@ public class MainController {
      * Zur Präsentation des Programms wird der Morsecode im Baum dargestellt.
      */
     private void createMorseTree(){
-        //TODO 02: Vervollständige den Morsebaum. Such bei google nach "morsecode as tree" als Vorlage. Das hilft, die Übersicht zu wahren.
-        BinaryTree<String> left = new BinaryTree<>("E");
-        BinaryTree<String> right = new BinaryTree<>("T");
+        BinaryTree<String> five = new BinaryTree<>("5");
+        BinaryTree<String> four = new BinaryTree<>("4");
 
-        binaryTree.setLeftTree(left);
-        binaryTree.setRightTree(right);
+        BinaryTree<String> three = new BinaryTree<>("3");
+
+        BinaryTree<String> two = new BinaryTree<>("2");
+
+        BinaryTree<String> one = new BinaryTree<>("1");
+
+        BinaryTree<String> six = new BinaryTree<>("6");
+
+        BinaryTree<String> seven = new BinaryTree<>("7");
+
+        BinaryTree<String> eight = new BinaryTree<>("8");
+
+        BinaryTree<String> nine = new BinaryTree<>("9");
+        BinaryTree<String> zero = new BinaryTree<>("0");
+
+
+        BinaryTree<String> h = new BinaryTree<>("h",five,four);
+        BinaryTree<String> v = new BinaryTree<>("v");
+        v.setRightTree(three);
+
+        BinaryTree<String> f = new BinaryTree<>("f");
+
+        BinaryTree<String> l = new BinaryTree<>("l");
+
+        BinaryTree<String> p = new BinaryTree<>("p");
+        BinaryTree<String> j = new BinaryTree<>("j");
+        j.setRightTree(one);
+
+        BinaryTree<String> b = new BinaryTree<>("b");
+        b.setLeftTree(six);
+
+        BinaryTree<String> x = new BinaryTree<>("x");
+
+        BinaryTree<String> c = new BinaryTree<>("c");
+
+        BinaryTree<String> y = new BinaryTree<>("y");
+
+        BinaryTree<String> z = new BinaryTree<>("z");
+        z.setLeftTree(seven);
+
+        BinaryTree<String> q = new BinaryTree<>("q");
+
+        BinaryTree<String> toEight = new BinaryTree<>("");
+        toEight.setLeftTree(eight);
+
+        BinaryTree<String> toNineZero = new BinaryTree<>("",nine,zero);
+
+
+        BinaryTree<String> s = new BinaryTree<>("s",h,v);
+        BinaryTree<String> u = new BinaryTree<>("u");
+        u.setLeftTree(f);
+
+        BinaryTree<String> r = new BinaryTree<>("r");
+        r.setLeftTree(l);
+        BinaryTree<String> w = new BinaryTree<>("w",p,j);
+
+        BinaryTree<String> d = new BinaryTree<>("d",b,x);
+        BinaryTree<String> k = new BinaryTree<>("k",c,y);
+
+        BinaryTree<String> g = new BinaryTree<>("g",z,q);
+        BinaryTree<String> o = new BinaryTree<>("o",toEight,toNineZero);
+
+
+        BinaryTree<String> i = new BinaryTree<>("i",s,u);
+        BinaryTree<String> a = new BinaryTree<>("a",r,w);
+
+        BinaryTree<String> n = new BinaryTree<>("n",d,k);
+        BinaryTree<String> m = new BinaryTree<>("m",g,o);
+
+
+        BinaryTree<String> e = new BinaryTree<>("e",i,a);
+        BinaryTree<String> t = new BinaryTree<>("t",n,m);
+        binaryTree.setLeftTree(e);
+        binaryTree.setRightTree(t);
     }
 
     /**
@@ -40,8 +114,8 @@ public class MainController {
         //Der linke und rechte Knoten in Tiefe 1 sind jeweils ein Viertel der Breite des Panels entfernt: spaceToTheSide = panel.getWidth()/4
         showTree(binaryTree, panel, panel.getWidth()/2, 50, panel.getWidth()/4);
 		
-	//Aufruf fordert das Panel zur Aktualisierung auf.
-	panel.repaint();
+	    //Aufruf fordert das Panel zur Aktualisierung auf.
+	    panel.repaint();
     }
 
     /**
@@ -54,15 +128,19 @@ public class MainController {
      * @param startY y-Koordinate seiner Wurzel
      * @param spaceToTheSide Gibt an, wie weit horizontal entfernt die folgenden Bäume gezeichnet werden soll.
      */
-    private void showTree(BinaryTree tree, DrawingPanel panel, double startX, double startY, double spaceToTheSide) {
-        //TODO 03: Vervollständige diese Methode. Aktuell wird nur der Wurzelknoten gezeichnet.
+    private void showTree(BinaryTree<String> tree, DrawingPanel panel, double startX, double startY, double spaceToTheSide) {
         if (!tree.isEmpty()) {
-            TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
+            TreeNode node = new TreeNode(startX, startY, 7, tree.getContent(), false);
             panel.addObject(node);
+            if(!tree.getLeftTree().isEmpty()) {
+                panel.addObject(new TreePath(startX - 20, startY - 10, startX - spaceToTheSide - 7, startY + 75 - 14, 7, new Random().nextBoolean()));
+                showTree(tree.getLeftTree(),panel,startX - spaceToTheSide,startY + 75, spaceToTheSide/2);
+            }
+            if(!tree.getRightTree().isEmpty()) {
+                panel.addObject(new TreePath(startX + 7, startY - 10, startX + spaceToTheSide - 5, startY + 75 - 14, 7, new Random().nextBoolean()));
+                showTree(tree.getRightTree(),panel,startX + spaceToTheSide, startY + 75, spaceToTheSide/2);
+            }
         }
-		
-		
-		
     }
 
     /**
