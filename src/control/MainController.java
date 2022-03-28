@@ -157,9 +157,14 @@ public class MainController {
      * @param tree Der zu traversierende Binärbaum.
      * @return Das Ergebnis der Traversierung als Zeichenkette.
      */
-    private String traverse(BinaryTree tree){
-        //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
-        return "Traverse? Wat dat denn?";
+    private String traverse(BinaryTree<String> tree){
+        if(tree.getLeftTree().isEmpty()) {
+            if(tree.getRightTree().isEmpty()) {
+                return tree.getContent();
+            }
+            return traverse(tree.getRightTree()) + ", " + tree.getContent() + ", ";
+        }
+        return traverse(tree.getLeftTree()) + ", " + traverse(tree.getRightTree()) + ", " + tree.getContent() + ", ";
     }
 	
     /**
@@ -167,7 +172,7 @@ public class MainController {
      * @param tree Der zu traversierende Binärbaum.
      * @return Die Anzahl der Knoten in diesem Baum
      */
-    private int countNodes(BinaryTree tree){
+    private int countNodes(BinaryTree<String> tree){
         //TODO 05: Übungsmethode
 	return 0;
     }
